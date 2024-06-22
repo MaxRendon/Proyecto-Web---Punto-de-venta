@@ -1,0 +1,54 @@
+create database pwdata;
+use pwdata;
+
+CREATE TABLE clients (
+    id INT,
+    name VARCHAR(150),
+    lastname VARCHAR(150),
+    address VARCHAR(150),
+    phone VARCHAR(15),
+    rfc VARCHAR(15),
+    curp VARCHAR(18),
+    cp VARCHAR(5),
+    CONSTRAINT clients_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE employees (
+    id INT,
+    name VARCHAR(150),
+    lastname VARCHAR(150),
+    department VARCHAR(150),
+    CONSTRAINT employees_pk PRIMARY KEY (id)
+);
+
+
+CREATE TABLE articles (
+    id INT,
+    description VARCHAR(150),
+    stock INT,
+    price INT,
+    CONSTRAINT article_pk PRIMARY KEY (id)
+);
+
+
+CREATE TABLE sales (
+    id INT,
+    sale_date DATE,
+    CONSTRAINT sales_pk PRIMARY KEY (id)
+);
+
+
+CREATE TABLE sale_details (
+    id int,
+    sale INT,
+    employee INT,
+    client INT,
+    article INT,
+    stock INT,
+    price INT,
+    CONSTRAINT saledetails_pk PRIMARY KEY (id),
+    FOREIGN KEY (sale) REFERENCES sales(id),
+    FOREIGN KEY (employee) REFERENCES employees(id),
+    FOREIGN KEY (client) REFERENCES clients(id),
+    FOREIGN KEY (article) REFERENCES articles(id)
+);
